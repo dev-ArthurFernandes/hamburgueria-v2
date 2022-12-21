@@ -1,7 +1,14 @@
-import { StyledBurguerList } from "./styled";
+import { StyledBurguerList } from "./style.js";
 import { Card } from "./BurguerCards/index";
 
-export const BurguerList = ({ itens, setCartItens, filter }) => {
+interface iBurguerList{
+  itens: Array<any>;
+  setCartItens: FunctionConstructor;
+  filter: string;
+}
+
+
+export const BurguerList = ({ itens, setCartItens, filter }: iBurguerList) => {
   return (
     <StyledBurguerList>
       {itens.map((item) => {
@@ -11,7 +18,7 @@ export const BurguerList = ({ itens, setCartItens, filter }) => {
               name={item.name}
               category={item.category}
               price={item.price}
-              imagem={item.img}
+              image={item.img}
               id={item.id}
               key={item.id}
               setCartItens={setCartItens}
@@ -23,7 +30,7 @@ export const BurguerList = ({ itens, setCartItens, filter }) => {
               name={item.name}
               category={item.category}
               price={item.price}
-              imagem={item.img}
+              image={item.img}
               id={item.id}
               key={item.id}
               setCartItens={setCartItens}

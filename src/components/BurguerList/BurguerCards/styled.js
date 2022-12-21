@@ -12,7 +12,7 @@ export const BurguerCard = styled.li`
 
   gap: 14px;
 
-  border: 2px solid var(--color-grey-20);
+  border: 2px solid var(--color-grey-2);
   border-radius: 5px;
 `;
 

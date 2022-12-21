@@ -1,4 +1,5 @@
-import { GreenButton } from "../../GreenButton";
+import { SourceHTMLAttributes } from "react";
+import { Button } from "../../Button";
 import {
   BurguerCard,
   ItemImage,
@@ -8,20 +9,29 @@ import {
   Image,
 } from "./styled";
 
-export const Card = ({ name, category, price, imagem, id, setCartItens }) => {
+interface iCart{
+  name: string;
+  category: string;
+  price: string;
+  image: string;
+  id: string;
+  setCartItens: any;
+}
+
+export const Card = ({ name, category, price, image, id, setCartItens }: iCart) => {
   function addToCart() {
     const item = {
       name: name,
       category: category,
-      image: imagem,
+      image: image,
       price: price,
     };
 
-    setCartItens((oldList) => {
+    setCartItens((oldList: any) => {
       if (oldList.length === 0) {
         return setCartItens([item]);
       } else {
-        oldList.forEach((element) => {
+        oldList.forEach((element: any) => {
           if (element.name === item.name) {
             setCartItens(oldList);
           } else {
@@ -35,13 +45,13 @@ export const Card = ({ name, category, price, imagem, id, setCartItens }) => {
   return (
     <BurguerCard>
       <ItemImage>
-        <Image src={imagem} />
+        <Image src={image} />
       </ItemImage>
       <ItemName>{name}</ItemName>
       <ItemType>{category}</ItemType>
       <ItemValue>R$ {price}</ItemValue>
       <div style={{ width: "90%" }}>
-        <GreenButton callback={addToCart}>Adicionar</GreenButton>
+        <Button callback={addToCart} className={"greenButton Button"}>Adicionar</Button>
       </div>
     </BurguerCard>
   );

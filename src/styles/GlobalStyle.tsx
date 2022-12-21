@@ -32,6 +32,11 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     position: relative;
-    z-index: -1;
+    z-index: 0;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    
   }
 `

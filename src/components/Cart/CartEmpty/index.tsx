@@ -1,4 +1,4 @@
-import { StyledCartEmpty } from "./styled";
+import { StyledCartEmpty } from "./style";
 
 export const CartEmpty = () => {
   return (

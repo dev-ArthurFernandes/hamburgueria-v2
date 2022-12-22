@@ -7,10 +7,10 @@ import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { api } from "../../../services/api.js";
-import { toast, ToastContainer} from "react-toastify";
+import { toast } from "react-toastify";
 
 interface iLogin{
-  name: string,
+  email: string,
   password: string
 }
 
@@ -19,7 +19,7 @@ export const LoginForm = () => {
   const navigate = useNavigate()
 
   const LoginShape = yup.object().shape({
-    name: yup.string().required("Você deve passar seu nome"),
+    email: yup.string().required("Você deve passar seu nome"),
     password: yup.string().required("Você deve passar sua senha")
   })
  
@@ -27,14 +27,15 @@ export const LoginForm = () => {
   
   const submit: SubmitHandler<iLogin> = async (data: iLogin) => {
     const LoginData = {
-     name: data.name,
+     email: data.email,
      password: data.password
     }
 
+    console.log(LoginData)
+
     try{
-     await api.post('/login', LoginData).then((resp: Response) => {
-       navigate("/dashbord")
-     })
+     await api.post('/login', LoginData)
+     navigate("/dashbord")
     }catch(error){
      console.error(error)
      toast.error(error.response.data, {
@@ -53,8 +54,8 @@ export const LoginForm = () => {
   return(
     <StyledForm onSubmit={handleSubmit(submit)}>
       <h2>Login</h2>
-      <Input label={"Nome"} type={"text"} name={"name"} register={register("password")} error={errors?.name ? "error" : ''}/>
-      {errors?.name && <p>{errors.name.message}</p>}
+      <Input label={"Email"} type={"text"} name={"email"} register={register("email")} error={errors?.email ? "error" : ''}/>
+      {errors?.email && <p>{errors.email.message}</p>}
       <Input label={"Senha"} type={"password"} name={"password"} register={register("password")} error={errors?.name ? "error" : ''}/>
       {errors?.password && <p>{errors.password.message}</p>}
       <Button type="submit" callback={() => false} className="formButton greenButton">Logar</Button>

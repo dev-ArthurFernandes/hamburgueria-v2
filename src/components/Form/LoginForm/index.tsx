@@ -8,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { api } from "../../../services/api.js";
 import { toast } from "react-toastify";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 interface iLogin{
   email: string,
@@ -25,16 +27,19 @@ export const LoginForm = () => {
  
   const { register, handleSubmit, formState: { errors } } = useForm<iLogin>({ mode: "onBlur", resolver: yupResolver(LoginShape) });
   
+  const {setToken, setUser} = useContext(UserContext) 
+
   const submit: SubmitHandler<iLogin> = async (data: iLogin) => {
     const LoginData = {
      email: data.email,
      password: data.password
     }
 
-    console.log(LoginData)
-
     try{
-     await api.post('/login', LoginData)
+     const response = await api.post('/login', LoginData)
+     localStorage.setItem("@KenzieBurguer:Token", response.data.accessToken)
+     setToken(response.data.accessToken)
+     setUser(response.data.user)
      navigate("/dashbord")
     }catch(error){
      console.error(error)
@@ -49,7 +54,7 @@ export const LoginForm = () => {
        theme: "light",
        });
     }
-   };
+  };
 
   return(
     <StyledForm onSubmit={handleSubmit(submit)}>

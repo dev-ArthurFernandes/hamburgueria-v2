@@ -22,21 +22,27 @@ export const ItemImage = styled.div`
 
   background: var(--color-grey-0);
 
-  display: flex;
+  display: grid;
+  align-content: center;
   justify-content: center;
+  justify-items: center;
   align-items: center;
+
+  position: relative;
+
+  overflow: hidden;
 `;
 
 export const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  width: fit-content;
+  height: fit-content;
 `;
 
 export const ItemName = styled.h2`
   width: 90%;
 
   font-weight: 700;
-  font-size: 18pt;
+  font-size: 14pt;
   line-height: 24px;
 
   color: var(--color-grey-100);

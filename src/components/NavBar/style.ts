@@ -12,9 +12,10 @@ export const StyledNavBar = styled.nav`
   
   justify-content: center;
 
-  position: fixed; 
+  position: fixed;
 
   top: 0;
+  left: 0;
 
   & .container{
     width: 70%;

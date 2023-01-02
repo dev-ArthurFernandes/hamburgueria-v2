@@ -5,14 +5,16 @@ import { MdLogout } from "react-icons/md";
 import { Button } from "../Button";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { BurguerContext } from "../../context/BurguerContext";
 
 export const NavBar = () => {
 
   const navigate = useNavigate()
 
-  const [cartOpen, setCartOpen] = useState(false)
+  const {cartOpen, setCartOpen, setFilter, cartCounter} = useContext(BurguerContext)
+
   const [searchOpen, setSearchOpen] = useState(false)
 
   function logout(){
@@ -21,6 +23,7 @@ export const NavBar = () => {
   }
 
   function openCart(){
+    console.log('ola')
     if(cartOpen){
       setCartOpen(false)
     }else{
@@ -46,7 +49,7 @@ export const NavBar = () => {
         <SearchInput className={searchOpen ? "OpenSearch" : ""} />
         <div className="CartIcon">
           <Button className="Button" callback={openCart}><FaShoppingCart/></Button>
-          <div className="CartCount">0</div>
+          <div className="CartCount">{cartCounter}</div>
         </div>
         <Button className="Button" callback={logout}><MdLogout/></Button>
       </span>

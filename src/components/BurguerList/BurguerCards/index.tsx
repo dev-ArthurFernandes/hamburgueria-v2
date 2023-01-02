@@ -1,4 +1,8 @@
-import { SourceHTMLAttributes } from "react";
+import { SourceHTMLAttributes, useContext } from "react";
+import { IoClipboardSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
+import { array, string } from "yup";
+import { BurguerContext } from "../../../context/BurguerContext";
 import { Button } from "../../Button";
 import {
   BurguerCard,
@@ -15,31 +19,31 @@ interface iCart{
   price: string;
   image: string;
   id: string;
-  setCartItens: any;
 }
 
-export const Card = ({ name, category, price, image, id, setCartItens }: iCart) => {
+
+export const Card = ({ name, category, price, image, id }: iCart) => {
+
+  const {setCart} = useContext(BurguerContext)
+
   function addToCart() {
     const item = {
       name: name,
-      category: category,
       image: image,
       price: price,
-    };
+      id: id,
+      qtd: 1,
+    }
+    
+    let Cart: Array<object> = []
 
-    setCartItens((oldList: any) => {
-      if (oldList.length === 0) {
-        return setCartItens([item]);
-      } else {
-        oldList.forEach((element: any) => {
-          if (element.name === item.name) {
-            setCartItens(oldList);
-          } else {
-            setCartItens([...oldList, item]);
-          }
-        });
-      }
-    });
+    if(localStorage.getItem("@KenzieBurguer:Cart")){
+      Cart = JSON.parse(localStorage.getItem("@KenzieBurguer:Cart") || "")
+      Cart = [...Cart, item]
+    }
+
+    localStorage.setItem("@KenzieBurguer:Cart", JSON.stringify(Cart))
+    setCart(Cart)
   }
 
   return (

@@ -36,10 +36,9 @@ export const RegisterForm = () => {
    }
    console.log(RegisterData)
    try{
-    await api.post('/users', RegisterData).then((resp: Response) => {
-      navigate("/")
-    })
-   }catch(error){
+    const response = await api.post('/users', RegisterData)
+    navigate("/")
+   }catch(error: any){
     console.error(error)
     toast.error(error.response.data, {
       position: "top-right",

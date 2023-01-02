@@ -1,17 +1,17 @@
 import { StyledBurguerList } from "./style.js";
 import { Card } from "./BurguerCards/index";
-
-interface iBurguerList{
-  itens: Array<any>;
-  setCartItens: FunctionConstructor;
-  filter: string;
-}
+import { useContext } from "react";
+import { BurguerContext } from "../../context/BurguerContext/index.js";
 
 
-export const BurguerList = ({ itens, setCartItens, filter }: iBurguerList) => {
+
+export const BurguerList = () => {
+
+  const {burguers, filter} = useContext(BurguerContext)
+
   return (
     <StyledBurguerList>
-      {itens.map((item) => {
+      {burguers.map((item: any) => {
         if (!filter) {
           return (
             <Card
@@ -21,7 +21,6 @@ export const BurguerList = ({ itens, setCartItens, filter }: iBurguerList) => {
               image={item.img}
               id={item.id}
               key={item.id}
-              setCartItens={setCartItens}
             />
           );
         } else if (item.name.toLowerCase().includes(filter.toLowerCase())) {
@@ -33,7 +32,6 @@ export const BurguerList = ({ itens, setCartItens, filter }: iBurguerList) => {
               image={item.img}
               id={item.id}
               key={item.id}
-              setCartItens={setCartItens}
             />
           );
         }

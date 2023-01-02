@@ -29,11 +29,16 @@ export const StyledGreenButton = styled.button`
     background-color: var(--color-primary);
     color: var(--color-grey-0);
   }
-
-
+  
+  
   &.greyButton1{
     background-color: var(--color-grey-0);
     color: var(--color-grey-2 );
+
+    &:hover{
+      background-color: var(--color-grey-1);
+      color: var(--color-grey-3);
+    }
   }
 
 `;

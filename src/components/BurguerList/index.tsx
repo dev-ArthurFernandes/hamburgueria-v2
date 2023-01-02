@@ -11,7 +11,7 @@ export const BurguerList = () => {
 
   return (
     <StyledBurguerList>
-      {burguers.map((item) => {
+      {burguers.map((item: any) => {
         if (!filter) {
           return (
             <Card

@@ -15,7 +15,7 @@ export const Cart = () => {
   useEffect(() => {
     function sumTotal(){
       let total = 0
-      cart.forEach((item) => {
+      cart.forEach((item: any) => {
         total += item.price
       })
       setTotal(total)
@@ -39,7 +39,7 @@ export const Cart = () => {
         <Button callback={closeCart}><IoClose/></Button>
       </div>
       <CartList>
-        {cart.map((item) => {
+        {cart.map((item: any) => {
           return(
             <ItemCart title={item.name} image={item.image} price={item.price} qtd={item.qtd} id={item.id} key={item.id}/>
           )

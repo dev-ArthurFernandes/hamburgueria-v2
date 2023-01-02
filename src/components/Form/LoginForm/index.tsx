@@ -41,7 +41,7 @@ export const LoginForm = () => {
      setToken(response.data.accessToken)
      setUser(response.data.user)
      navigate("/dashbord")
-    }catch(error){
+    }catch(error: any){
      console.error(error)
      toast.error(error.response.data, {
        position: "top-right",
